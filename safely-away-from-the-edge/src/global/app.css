@@ -1,0 +1,121 @@
+/*
+  Global App CSS
+  ----------------------
+  Use this file for styles that should be applied to all components.
+  For example, "font-family" within the "body" selector is a CSS property
+  most apps will want applied to all components.
+
+  Any global CSS variables should also be applied here.
+*/
+/* Imports are currently not live reloading  https://github.com/ionic-team/stencil-postcss/issues/7 
+   So we have to keep everything in this file unfortunately :/
+*/
+
+/* @import "./styles/tailwind/base.css"; */
+
+/* @import "./styles/global.css"; */
+
+/* @import "./styles/tailwind/components.css";
+
+@import "./styles/tailwind/utilities.css"; */
+
+/* @import "./styles/helpers.css"; */
+
+@tailwind base;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-header;
+  letter-spacing: 1px;
+  color: theme("colors.primary.600");
+  @apply mb-4;
+}
+
+p {
+  @apply mb-4;
+}
+
+h1 {
+  @apply text-4xl;
+}
+
+h2 {
+  @apply text-3xl;
+}
+
+h3 {
+  @apply text-2xl;
+}
+
+h4 {
+  @apply text-xl;
+}
+
+h5 {
+  @apply text-lg;
+}
+
+h6 {
+  @apply text-base;
+}
+
+body {
+  @apply font-body;
+  @apply text-base;
+}
+
+a {
+  @apply underline;
+  @apply transition;
+  @apply duration-300;
+}
+
+a:not(.btn) {
+  @apply text-secondary-600;
+}
+
+a:not(.btn):hover {
+  @apply text-secondary-300;
+}
+
+@tailwind components;
+
+@tailwind utilities;
+
+.btn {
+  @apply inline-block;
+  @apply cursor-pointer;
+  @apply bg-white;
+  @apply text-neutral-800;
+  @apply font-semibold;
+  @apply py-2;
+  @apply px-4;
+  @apply border;
+  @apply border-neutral-400;
+  @apply rounded;
+  @apply shadow;
+}
+
+.btn:hover {
+  @apply bg-neutral-200;
+}
+
+a.btn {
+  @apply no-underline;
+}
+
+.children-block > * {
+  display: block !important;
+}
+
+.children-no-link-underline a {
+  text-decoration: none !important;
+}
+
+.flex-basis-0 {
+  flex-basis: 0;
+}
