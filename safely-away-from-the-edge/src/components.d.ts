@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { IRegionHeaderMenuItems } from "./components/shared/header/type";
+import { ICategory } from "./components/pages/category/type";
 import { MatchResults } from "@stencil/router";
 import { IHero } from "./components/shared/app-hero/type";
 export namespace Components {
@@ -26,6 +27,11 @@ export namespace Components {
         "videoSrc"?: string;
     }
     interface AppRoot {
+    }
+    interface PageCategories {
+        "categories": ICategory[];
+        "header": string;
+        "image"?: string;
     }
     interface PageCategory {
         "match": MatchResults;
@@ -72,6 +78,12 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLPageCategoriesElement extends Components.PageCategories, HTMLStencilElement {
+    }
+    var HTMLPageCategoriesElement: {
+        prototype: HTMLPageCategoriesElement;
+        new (): HTMLPageCategoriesElement;
+    };
     interface HTMLPageCategoryElement extends Components.PageCategory, HTMLStencilElement {
     }
     var HTMLPageCategoryElement: {
@@ -90,6 +102,7 @@ declare global {
         "app-header": HTMLAppHeaderElement;
         "app-hero": HTMLAppHeroElement;
         "app-root": HTMLAppRootElement;
+        "page-categories": HTMLPageCategoriesElement;
         "page-category": HTMLPageCategoryElement;
         "page-home": HTMLPageHomeElement;
     }
@@ -113,6 +126,11 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface PageCategories {
+        "categories"?: ICategory[];
+        "header"?: string;
+        "image"?: string;
+    }
     interface PageCategory {
         "match"?: MatchResults;
     }
@@ -132,6 +150,7 @@ declare namespace LocalJSX {
         "app-header": AppHeader;
         "app-hero": AppHero;
         "app-root": AppRoot;
+        "page-categories": PageCategories;
         "page-category": PageCategory;
         "page-home": PageHome;
     }
@@ -145,6 +164,7 @@ declare module "@stencil/core" {
             "app-header": LocalJSX.AppHeader & JSXBase.HTMLAttributes<HTMLAppHeaderElement>;
             "app-hero": LocalJSX.AppHero & JSXBase.HTMLAttributes<HTMLAppHeroElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "page-categories": LocalJSX.PageCategories & JSXBase.HTMLAttributes<HTMLPageCategoriesElement>;
             "page-category": LocalJSX.PageCategory & JSXBase.HTMLAttributes<HTMLPageCategoryElement>;
             "page-home": LocalJSX.PageHome & JSXBase.HTMLAttributes<HTMLPageHomeElement>;
         }

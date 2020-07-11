@@ -1,5 +1,5 @@
 import { Component, h } from "@stencil/core";
-import { headerData, footerData, homeData } from "../../data";
+import { headerData, footerData, homeData, categoriesData } from "../../data";
 
 @Component({
   tag: "app-root",
@@ -24,7 +24,15 @@ export class AppRoot {
                 exact={true}
                 componentProps={homeData}
               />
-              <stencil-route url="/profile/:name" component="page-category" />
+              <stencil-route
+                url="/categories/:slug"
+                component="page-category"
+              />
+              <stencil-route
+                url="/categories"
+                component="page-categories"
+                componentProps={categoriesData}
+              />
             </stencil-route-switch>
           </stencil-router>
         </main>

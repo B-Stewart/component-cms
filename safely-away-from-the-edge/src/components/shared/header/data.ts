@@ -8,7 +8,7 @@ export const data: IRegionHeader = {
       name: "Home",
     },
     {
-      link: "/blog",
+      link: "/categories",
       name: "Blog",
     },
     {
