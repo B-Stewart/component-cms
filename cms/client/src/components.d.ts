@@ -5,28 +5,30 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MatchResults, } from "@stencil/router";
 export namespace Components {
-    interface AppHome {
+    interface AppFieldHtml {
+        "fieldId": string;
     }
-    interface AppProfile {
-        "match": MatchResults;
+    interface AppForm {
+        "action": string;
     }
     interface AppRoot {
     }
+    interface PageHome {
+    }
 }
 declare global {
-    interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
+    interface HTMLAppFieldHtmlElement extends Components.AppFieldHtml, HTMLStencilElement {
     }
-    var HTMLAppHomeElement: {
-        prototype: HTMLAppHomeElement;
-        new (): HTMLAppHomeElement;
+    var HTMLAppFieldHtmlElement: {
+        prototype: HTMLAppFieldHtmlElement;
+        new (): HTMLAppFieldHtmlElement;
     };
-    interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
+    interface HTMLAppFormElement extends Components.AppForm, HTMLStencilElement {
     }
-    var HTMLAppProfileElement: {
-        prototype: HTMLAppProfileElement;
-        new (): HTMLAppProfileElement;
+    var HTMLAppFormElement: {
+        prototype: HTMLAppFormElement;
+        new (): HTMLAppFormElement;
     };
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
@@ -34,33 +36,45 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLPageHomeElement extends Components.PageHome, HTMLStencilElement {
+    }
+    var HTMLPageHomeElement: {
+        prototype: HTMLPageHomeElement;
+        new (): HTMLPageHomeElement;
+    };
     interface HTMLElementTagNameMap {
-        "app-home": HTMLAppHomeElement;
-        "app-profile": HTMLAppProfileElement;
+        "app-field-html": HTMLAppFieldHtmlElement;
+        "app-form": HTMLAppFormElement;
         "app-root": HTMLAppRootElement;
+        "page-home": HTMLPageHomeElement;
     }
 }
 declare namespace LocalJSX {
-    interface AppHome {
+    interface AppFieldHtml {
+        "fieldId"?: string;
     }
-    interface AppProfile {
-        "match"?: MatchResults;
+    interface AppForm {
+        "action"?: string;
     }
     interface AppRoot {
     }
+    interface PageHome {
+    }
     interface IntrinsicElements {
-        "app-home": AppHome;
-        "app-profile": AppProfile;
+        "app-field-html": AppFieldHtml;
+        "app-form": AppForm;
         "app-root": AppRoot;
+        "page-home": PageHome;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
-            "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
+            "app-field-html": LocalJSX.AppFieldHtml & JSXBase.HTMLAttributes<HTMLAppFieldHtmlElement>;
+            "app-form": LocalJSX.AppForm & JSXBase.HTMLAttributes<HTMLAppFormElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "page-home": LocalJSX.PageHome & JSXBase.HTMLAttributes<HTMLPageHomeElement>;
         }
     }
 }

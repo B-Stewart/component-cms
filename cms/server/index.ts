@@ -1,29 +1,33 @@
 import fastify from "fastify";
 import fs from "fs";
+import cors from "fastify-cors";
 
 const fsp = fs.promises;
 
 const server = fastify();
 
-server.get("/ping", async (request, reply) => {
-  // create a JSON object
-  const user = {
-    id: 1,
-    name: "John Doe",
-    age: 22,
-  };
+// CORS config
+server.register(cors, {
+  origin: (origin, cb) => {
+    if (/localhost/.test(origin)) {
+      //  Request from localhost will pass
+      cb(null, true);
+      return;
+    }
+    cb(new Error("Not allowed"), false);
+  },
+});
 
-  // convert JSON object to string
-  const data = JSON.stringify(user);
+server.post("/ping", async (request, reply) => {
+  const data = JSON.stringify(request.body);
 
   // write JSON string to a file
-
   await fsp.writeFile("./data/user.json", data);
 
   return "pong\n";
 });
 
-server.listen(8080, (err, address) => {
+server.listen(8082, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
