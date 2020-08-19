@@ -5,7 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { IField } from "./global/types";
+import { RouterHistory } from "@stencil/router";
 export namespace Components {
+    interface AppField {
+        "field": Partial<IField>;
+    }
     interface AppFieldHtml {
         "fieldId": string;
     }
@@ -14,10 +19,21 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface PageCollectionEdit {
+        "history": RouterHistory;
+    }
+    interface PageCollections {
+    }
     interface PageHome {
     }
 }
 declare global {
+    interface HTMLAppFieldElement extends Components.AppField, HTMLStencilElement {
+    }
+    var HTMLAppFieldElement: {
+        prototype: HTMLAppFieldElement;
+        new (): HTMLAppFieldElement;
+    };
     interface HTMLAppFieldHtmlElement extends Components.AppFieldHtml, HTMLStencilElement {
     }
     var HTMLAppFieldHtmlElement: {
@@ -36,6 +52,18 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLPageCollectionEditElement extends Components.PageCollectionEdit, HTMLStencilElement {
+    }
+    var HTMLPageCollectionEditElement: {
+        prototype: HTMLPageCollectionEditElement;
+        new (): HTMLPageCollectionEditElement;
+    };
+    interface HTMLPageCollectionsElement extends Components.PageCollections, HTMLStencilElement {
+    }
+    var HTMLPageCollectionsElement: {
+        prototype: HTMLPageCollectionsElement;
+        new (): HTMLPageCollectionsElement;
+    };
     interface HTMLPageHomeElement extends Components.PageHome, HTMLStencilElement {
     }
     var HTMLPageHomeElement: {
@@ -43,13 +71,19 @@ declare global {
         new (): HTMLPageHomeElement;
     };
     interface HTMLElementTagNameMap {
+        "app-field": HTMLAppFieldElement;
         "app-field-html": HTMLAppFieldHtmlElement;
         "app-form": HTMLAppFormElement;
         "app-root": HTMLAppRootElement;
+        "page-collection-edit": HTMLPageCollectionEditElement;
+        "page-collections": HTMLPageCollectionsElement;
         "page-home": HTMLPageHomeElement;
     }
 }
 declare namespace LocalJSX {
+    interface AppField {
+        "field"?: Partial<IField>;
+    }
     interface AppFieldHtml {
         "fieldId"?: string;
     }
@@ -58,12 +92,20 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface PageCollectionEdit {
+        "history"?: RouterHistory;
+    }
+    interface PageCollections {
+    }
     interface PageHome {
     }
     interface IntrinsicElements {
+        "app-field": AppField;
         "app-field-html": AppFieldHtml;
         "app-form": AppForm;
         "app-root": AppRoot;
+        "page-collection-edit": PageCollectionEdit;
+        "page-collections": PageCollections;
         "page-home": PageHome;
     }
 }
@@ -71,9 +113,12 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "app-field": LocalJSX.AppField & JSXBase.HTMLAttributes<HTMLAppFieldElement>;
             "app-field-html": LocalJSX.AppFieldHtml & JSXBase.HTMLAttributes<HTMLAppFieldHtmlElement>;
             "app-form": LocalJSX.AppForm & JSXBase.HTMLAttributes<HTMLAppFormElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "page-collection-edit": LocalJSX.PageCollectionEdit & JSXBase.HTMLAttributes<HTMLPageCollectionEditElement>;
+            "page-collections": LocalJSX.PageCollections & JSXBase.HTMLAttributes<HTMLPageCollectionsElement>;
             "page-home": LocalJSX.PageHome & JSXBase.HTMLAttributes<HTMLPageHomeElement>;
         }
     }

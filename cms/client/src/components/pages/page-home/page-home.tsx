@@ -10,6 +10,7 @@ export class PageHome {
     return (
       <Host>
         <div>Home:</div>
+        <stencil-route-link url="/collections">Collections</stencil-route-link>
         <app-form action={this.api}>
           <input id="tset2" name="inputname" />
           <app-field-html fieldId={"tinymce"} />
