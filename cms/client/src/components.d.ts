@@ -19,6 +19,10 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface AppSlugPair {
+        "slug": string;
+        "slugName": string;
+    }
     interface PageCollectionEdit {
         "history": RouterHistory;
     }
@@ -52,6 +56,12 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLAppSlugPairElement extends Components.AppSlugPair, HTMLStencilElement {
+    }
+    var HTMLAppSlugPairElement: {
+        prototype: HTMLAppSlugPairElement;
+        new (): HTMLAppSlugPairElement;
+    };
     interface HTMLPageCollectionEditElement extends Components.PageCollectionEdit, HTMLStencilElement {
     }
     var HTMLPageCollectionEditElement: {
@@ -75,6 +85,7 @@ declare global {
         "app-field-html": HTMLAppFieldHtmlElement;
         "app-form": HTMLAppFormElement;
         "app-root": HTMLAppRootElement;
+        "app-slug-pair": HTMLAppSlugPairElement;
         "page-collection-edit": HTMLPageCollectionEditElement;
         "page-collections": HTMLPageCollectionsElement;
         "page-home": HTMLPageHomeElement;
@@ -92,6 +103,11 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface AppSlugPair {
+        "onSlugChange"?: (event: CustomEvent<{ slugName: string; slug: string }>) => void;
+        "slug"?: string;
+        "slugName"?: string;
+    }
     interface PageCollectionEdit {
         "history"?: RouterHistory;
     }
@@ -104,6 +120,7 @@ declare namespace LocalJSX {
         "app-field-html": AppFieldHtml;
         "app-form": AppForm;
         "app-root": AppRoot;
+        "app-slug-pair": AppSlugPair;
         "page-collection-edit": PageCollectionEdit;
         "page-collections": PageCollections;
         "page-home": PageHome;
@@ -117,6 +134,7 @@ declare module "@stencil/core" {
             "app-field-html": LocalJSX.AppFieldHtml & JSXBase.HTMLAttributes<HTMLAppFieldHtmlElement>;
             "app-form": LocalJSX.AppForm & JSXBase.HTMLAttributes<HTMLAppFormElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "app-slug-pair": LocalJSX.AppSlugPair & JSXBase.HTMLAttributes<HTMLAppSlugPairElement>;
             "page-collection-edit": LocalJSX.PageCollectionEdit & JSXBase.HTMLAttributes<HTMLPageCollectionEditElement>;
             "page-collections": LocalJSX.PageCollections & JSXBase.HTMLAttributes<HTMLPageCollectionsElement>;
             "page-home": LocalJSX.PageHome & JSXBase.HTMLAttributes<HTMLPageHomeElement>;

@@ -1,3 +1,5 @@
+import slugifyLib from "slugify";
+
 export const generateUUID = () => {
   // Public Domain/MIT
   var d = new Date().getTime(); //Timestamp
@@ -15,4 +17,8 @@ export const generateUUID = () => {
     }
     return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
   });
+};
+
+export const slugify = (s: string): string => {
+  return slugifyLib(s, { lower: true, strict: true });
 };

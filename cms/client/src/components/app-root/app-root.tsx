@@ -8,7 +8,9 @@ export class AppRoot {
     return (
       <div>
         <header>
-          <h1>CMS Client</h1>
+          <h1>
+            <stencil-route-link url="/">CMS Client</stencil-route-link>
+          </h1>
         </header>
 
         <main>

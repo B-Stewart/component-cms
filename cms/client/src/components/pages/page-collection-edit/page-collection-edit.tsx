@@ -1,6 +1,6 @@
 import { Component, h, Prop, State } from "@stencil/core";
 import { RouterHistory } from "@stencil/router";
-import { IField } from "../../../global/types";
+import { IEntity, IField } from "../../../global/types";
 import { generateUUID } from "../../../global/helpers";
 
 @Component({
@@ -9,12 +9,13 @@ import { generateUUID } from "../../../global/helpers";
 export class PageCollectionEdit {
   @Prop() history: RouterHistory;
   @State() fields: Partial<IField>[] = [];
+  @State() entity: Partial<IEntity> = {};
 
   addField() {
-    console.log("field");
     this.fields = [...this.fields, { id: generateUUID() }];
   }
 
+  // TODO: Type event
   handleInput(id: string, key: string, event: any) {
     const value = event.target.value;
 
@@ -27,12 +28,13 @@ export class PageCollectionEdit {
   }
 
   handleSubmit = async () => {
+    // TODO: Is this best practice?
+    this.entity.fields = this.fields as IField[];
+    console.log("posting", this.entity);
+
     const response = await fetch(`//localhost:8082/collection`, {
       method: "POST",
-      body: JSON.stringify({
-        id: this.history.location.query.id,
-        fields: this.fields,
-      }),
+      body: JSON.stringify(this.entity),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
@@ -42,22 +44,38 @@ export class PageCollectionEdit {
     console.log(res);
   };
 
-  render() {
-    const collectionId = this.history.location.query.id;
+  componentWillLoad() {
+    this.entity.id = this.history.location.query.id;
+  }
 
+  render() {
     // const isNew = !!collectionId;
 
     return (
       <section>
-        <div>collectionid: {collectionId}</div>
-        <button onClick={() => this.addField()}>Add Field</button>
+        <div>Entity id: {this.entity.id}</div>
+        <div>
+          <app-slug-pair
+            slugName={this.entity.slugName}
+            slug={this.entity.slug}
+            onSlugChange={(e) => {
+              this.entity = { ...this.entity, ...e.detail };
+              console.log("slug changed", e.detail, this.entity);
+            }}
+          />
+        </div>
+
         <h1>Fields:</h1>
+        <div>
+          <button onClick={() => this.addField()}>Add Field</button>
+        </div>
 
         {this.fields.map((field) => (
           <div>
+            {/* TODO: Add validation so this can't be 'externalId' / already existing fields */}
             <input
-              name="externalId"
-              value={field.externalId}
+              name="slugName"
+              value={field.slugName}
               onInput={(e) => this.handleInput(field.id, "externalId", e)}
             />
             <select

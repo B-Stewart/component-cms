@@ -1,8 +1,10 @@
 import fastify from "fastify";
 import fs from "fs";
 import cors from "fastify-cors";
-import { IFieldRequest } from "../client/src/global/types";
+import { IEntity } from "../client/src/global/types";
 import { v4 } from "uuid";
+import { getAllEntities } from "./services/entity-service";
+import { COLLECTION_PATH } from "./constants";
 
 const fsp = fs.promises;
 
@@ -37,15 +39,29 @@ server.post("/ping", async (request, reply) => {
 });
 
 server.post("/collection", async (request, reply) => {
-  const data = request.body as IFieldRequest;
+  const data = request.body as IEntity;
+  const dataPath = `${COLLECTION_PATH}/${data.id}.json`;
+  const entities = await getAllEntities(COLLECTION_PATH);
+  const fileNameMatches = entities.find((e) => e.slug === data.slug);
+
+  if (!data.slug) {
+    throw Error("Slug must exist");
+  }
 
   if (!data.id) {
-    data.id = v4();
+    // TODO: Initial file name is the slug, if slug changes the file name won't. Evaluate this.
+    data.id = data.slug;
+
+    if (fileNameMatches) {
+      throw Error("File name (slug) already exists. Must be unique.");
+    }
+  } else {
+    // TODO: Check for name clashes
   }
 
   await fsp.writeFile(
-    `./data/collections/${data.id}.json`,
-    JSON.stringify(data)
+    `${COLLECTION_PATH}/${data.id}.json`,
+    JSON.stringify(data, null, 2)
   );
 
   return JSON.stringify({ status: "Success" });
@@ -53,22 +69,8 @@ server.post("/collection", async (request, reply) => {
 
 server.get("/collections", async (request, reply) => {
   console.log("collections");
-  const files = await fsp.readdir("./data/collections");
-  const data = await Promise.all(
-    files.map(async (f) => {
-      const file = await fsp.readFile(`./data/collections/${f}`);
-      return JSON.parse(file.toString()) as IFieldRequest;
-    })
-  );
 
-  // if (!data.id) {
-  //   data.id = v4();
-  // }
-
-  // await fsp.writeFile(
-  //   `./data/collections/${data.id}.json`,
-  //   JSON.stringify(data)
-  // );
+  const data = await getAllEntities(COLLECTION_PATH);
 
   return JSON.stringify(data);
 });

@@ -1,0 +1,11 @@
+{
+  "slug": "author",
+  "slugName": "Author",
+  "fields": [
+    {
+      "id": "7e4c75f7-0841-4b35-a2a8-47758d54f6d7",
+      "externalId": "Name"
+    }
+  ],
+  "id": "author"
+}
