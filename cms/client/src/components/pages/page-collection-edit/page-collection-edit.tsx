@@ -12,7 +12,7 @@ export class PageCollectionEdit {
   @State() entity: Partial<IEntity> = {};
 
   addField() {
-    this.fields = [...this.fields, { id: generateUUID() }];
+    this.fields = [...this.fields, { id: generateUUID(), type: "text" }];
   }
 
   // TODO: Type event
@@ -70,13 +70,18 @@ export class PageCollectionEdit {
           <button onClick={() => this.addField()}>Add Field</button>
         </div>
 
-        {this.fields.map((field) => (
+        {this.fields.map((field, i) => (
           <div>
             {/* TODO: Add validation so this can't be 'externalId' / already existing fields */}
-            <input
-              name="slugName"
-              value={field.slugName}
-              onInput={(e) => this.handleInput(field.id, "externalId", e)}
+            <app-slug-pair
+              slugName={field.slugName}
+              slug={field.slug}
+              onSlugChange={(e) => {
+                let temp = this.fields;
+                temp[i] = { ...field, ...e.detail };
+                this.fields = temp;
+                console.log("slug changed", e.detail, field);
+              }}
             />
             <select
               name="type"

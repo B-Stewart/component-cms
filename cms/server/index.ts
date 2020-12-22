@@ -3,7 +3,10 @@ import fs from "fs";
 import cors from "fastify-cors";
 import { IEntity } from "../client/src/global/types";
 import { v4 } from "uuid";
-import { getAllEntities } from "./services/entity-service";
+import {
+  getAllEntities,
+  getTypedEntityString,
+} from "./services/entity-service";
 import { COLLECTION_PATH } from "./constants";
 
 const fsp = fs.promises;
@@ -40,6 +43,8 @@ server.post("/ping", async (request, reply) => {
 
 server.post("/collection", async (request, reply) => {
   const data = request.body as IEntity;
+  console.log(data);
+
   const dataPath = `${COLLECTION_PATH}/${data.id}.json`;
   const entities = await getAllEntities(COLLECTION_PATH);
   const fileNameMatches = entities.find((e) => e.slug === data.slug);
@@ -58,10 +63,14 @@ server.post("/collection", async (request, reply) => {
   } else {
     // TODO: Check for name clashes
   }
-
   await fsp.writeFile(
     `${COLLECTION_PATH}/${data.id}.json`,
     JSON.stringify(data, null, 2)
+  );
+
+  await fsp.writeFile(
+    `${COLLECTION_PATH}/${data.id}.ts`,
+    getTypedEntityString(data)
   );
 
   return JSON.stringify({ status: "Success" });

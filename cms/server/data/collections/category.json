@@ -1,0 +1,19 @@
+{
+  "slug": "category",
+  "slugName": "Category",
+  "fields": [
+    {
+      "id": "e665491d-4c0d-4a0d-92ad-59958c1af4fc",
+      "type": "text",
+      "slug": "name",
+      "slugName": "Name"
+    },
+    {
+      "id": "90a4efa9-0f3d-4630-98fb-6159a6fb07f6",
+      "type": "html",
+      "slug": "test",
+      "slugName": "Test"
+    }
+  ],
+  "id": "category"
+}
