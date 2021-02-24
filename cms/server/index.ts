@@ -2,9 +2,9 @@ import fastify from "fastify";
 import fs from "fs";
 import cors from "fastify-cors";
 import { IEntity } from "../client/src/global/types";
-import { v4 } from "uuid";
 import {
   getAllEntities,
+  getEntity,
   getTypedEntityString,
 } from "./services/entity-service";
 import { COLLECTION_PATH } from "./constants";
@@ -81,6 +81,14 @@ server.get("/collections", async (request, reply) => {
 
   const data = await getAllEntities(COLLECTION_PATH);
 
+  return JSON.stringify(data);
+});
+
+server.get("/collections/:collectionId", async (request, reply) => {
+  const { collectionId } = request.params as { collectionId: string };
+
+  const data = await getEntity(COLLECTION_PATH, collectionId);
+  console.log(data);
   return JSON.stringify(data);
 });
 

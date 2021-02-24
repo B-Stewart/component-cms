@@ -8,7 +8,7 @@ export class PageCollections {
   @State() collections: ITypedEntity[] = [];
 
   async componentWillLoad() {
-    const collectionsRequest = await fetch(`//localhost:8082/collection`);
+    const collectionsRequest = await fetch(`//localhost:8082/collections`);
 
     this.collections = await collectionsRequest.json();
   }
@@ -20,7 +20,15 @@ export class PageCollections {
           Add New Collection
         </stencil-route-link>
 
-        <div></div>
+        <div>
+          {this.collections.map((c) => (
+            <div>
+              <stencil-route-link url={`/collections/edit/${c.slug}`}>
+                {c.slugName}
+              </stencil-route-link>
+            </div>
+          ))}
+        </div>
       </section>
     );
   }
