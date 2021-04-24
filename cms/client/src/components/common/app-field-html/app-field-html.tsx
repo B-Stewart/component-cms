@@ -44,7 +44,7 @@ export class AppFieldHtml {
       theme: "snow",
     });
   }
-
+  //https://stackoverflow.com/questions/46626633/how-do-you-insert-html-into-a-quilljs
   render() {
     return (
       <Host>
