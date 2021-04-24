@@ -18,10 +18,18 @@ export class AppRoot {
             <stencil-route-switch scrollTopOffset={0}>
               <stencil-route url="/" component="page-home" exact={true} />
               <stencil-route
-                url="/collections/edit"
+                url="/collections/edit/:id"
                 component="page-collection-edit"
               />
+              <stencil-route
+                url="/collections/:id"
+                component="page-collection"
+              />
               <stencil-route url="/collections" component="page-collections" />
+              <stencil-route
+                url="/entities/edit"
+                component="page-entity-edit"
+              />
             </stencil-route-switch>
           </stencil-router>
         </main>

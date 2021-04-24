@@ -76,7 +76,7 @@ server.post("/collection", async (request, reply) => {
   return JSON.stringify({ status: "Success" });
 });
 
-server.get("/collections", async (request, reply) => {
+server.get("/meta/collections", async (request, reply) => {
   console.log("collections");
 
   const data = await getAllEntities(COLLECTION_PATH);
@@ -84,7 +84,7 @@ server.get("/collections", async (request, reply) => {
   return JSON.stringify(data);
 });
 
-server.get("/collections/:collectionId", async (request, reply) => {
+server.get("/meta/collections/:collectionId", async (request, reply) => {
   const { collectionId } = request.params as { collectionId: string };
 
   const data = await getEntity(COLLECTION_PATH, collectionId);

@@ -16,17 +16,16 @@
     "@stencil/postcss": "1.0.1",
     "@stencil/router": "1.0.1",
     "@types/autoprefixer": "9.7.2",
-    "@types/tinymce": "4.5.24",
     "@types/uuid": "8.3.0",
     "autoprefixer": "9.8.5",
     "cross-env": "7.0.2",
     "postcss-import": "12.0.1",
     "prettier": "2.2.1",
-    "tailwindcss": "1.4.6",
-    "tinymce": "5.4.1"
+    "tailwindcss": "1.4.6"
   },
   "license": "MIT",
   "dependencies": {
+    "quill": "1.3.7",
     "slugify": "1.4.6",
     "uuid": "8.3.0"
   }

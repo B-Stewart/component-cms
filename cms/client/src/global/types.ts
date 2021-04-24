@@ -6,12 +6,27 @@ export interface IEntity {
   fields: IField[];
 }
 
+export class Entity implements IEntity {
+  id: string;
+  slugName: string; // Custom name of the uri
+  slug: string; // url/unique alphabetical lower case id
+
+  fields: IField[];
+
+  constructor() {
+    this.id = null;
+    this.slug = null;
+    this.slugName = null;
+    this.fields = [];
+  }
+}
+
 export interface IField {
   type: "html" | "text"; // TODO: Unify with map so we don't have copy pasta
   id: string;
   slugName: string;
   slug: string;
-  value: any; // Can this be any? Should we extend based on type?
+  value: any;
 }
 
 // Saved values

@@ -1,38 +1,49 @@
 import { Component, h, Prop, State } from "@stencil/core";
-import { RouterHistory } from "@stencil/router";
-import { IEntity, IField } from "../../../global/types";
+import { MatchResults } from "@stencil/router";
+import { Entity } from "../../../global/types";
 import { generateUUID } from "../../../global/helpers";
 
 @Component({
   tag: "page-collection-edit",
 })
 export class PageCollectionEdit {
-  @Prop() history: RouterHistory;
-  @State() fields: Partial<IField>[] = [];
-  @State() entity: Partial<IEntity> = {};
+  @Prop() match: MatchResults;
+  @State() entity = new Entity();
+
+  async componentWillLoad() {
+    if (this.match.params.id) {
+      const req = await fetch(
+        `//localhost:8082/meta/collections/${this.match.params.id}`
+      );
+      this.entity = await req.json();
+      console.log(this.entity);
+    }
+  }
 
   addField() {
-    this.fields = [...this.fields, { id: generateUUID(), type: "text" }];
+    this.entity.fields = [
+      ...this.entity.fields,
+      { id: generateUUID(), type: "text", slug: "", slugName: "", value: null },
+    ];
   }
 
   // TODO: Type event
   handleInput(id: string, key: string, event: any) {
     const value = event.target.value;
 
-    const index = this.fields.findIndex((f) => f.id === id);
+    const index = this.entity.fields.findIndex((f) => f.id === id);
 
-    const fields = this.fields;
+    const fields = this.entity.fields;
     fields[index][key] = value;
 
-    this.fields = fields;
+    this.entity.fields = fields;
   }
 
   handleSubmit = async () => {
     // TODO: Is this best practice?
-    this.entity.fields = this.fields as IField[];
     console.log("posting", this.entity);
 
-    const response = await fetch(`//localhost:8082/collection`, {
+    const response = await fetch(`//localhost:8082/meta/collection`, {
       method: "POST",
       body: JSON.stringify(this.entity),
       headers: {
@@ -43,10 +54,6 @@ export class PageCollectionEdit {
     const res = await response.json();
     console.log(res);
   };
-
-  componentWillLoad() {
-    this.entity.id = this.history.location.query.id;
-  }
 
   render() {
     // const isNew = !!collectionId;
@@ -70,16 +77,16 @@ export class PageCollectionEdit {
           <button onClick={() => this.addField()}>Add Field</button>
         </div>
 
-        {this.fields.map((field, i) => (
+        {this.entity.fields.map((field, i) => (
           <div>
             {/* TODO: Add validation so this can't be 'externalId' / already existing fields */}
             <app-slug-pair
               slugName={field.slugName}
               slug={field.slug}
               onSlugChange={(e) => {
-                let temp = this.fields;
+                let temp = this.entity.fields;
                 temp[i] = { ...field, ...e.detail };
-                this.fields = temp;
+                this.entity.fields = temp;
                 console.log("slug changed", e.detail, field);
               }}
             />

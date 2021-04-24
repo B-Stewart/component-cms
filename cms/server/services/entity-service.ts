@@ -24,6 +24,15 @@ export const getAllEntities = async (path: string): Promise<IEntity[]> => {
   return data;
 };
 
+export const getEntity = async (
+  path: string,
+  id: string
+): Promise<IEntity | undefined> => {
+  const entities = await getAllEntities(path);
+
+  return entities.find((e) => e.id === id);
+};
+
 export const getTypedEntityString = (entity: IEntity) => {
   const predicates = ["string"];
   const adds = ["ITypedEntity", "ITypedField"];

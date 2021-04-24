@@ -1,43 +1,57 @@
-import { Component, Host, h, Element, Prop } from "@stencil/core";
+import { Component, Host, h, Element, Prop, State } from "@stencil/core";
+
+// import Quill from "quill/core";
+
+// import Toolbar from "quill/modules/toolbar";
+// import Snow from "quill/themes/snow";
+
+// import Bold from "quill/formats/bold";
+// import Italic from "quill/formats/italic";
+// import Header from "quill/formats/header";
+
+// Quill.register({
+//   "modules/toolbar": Toolbar,
+//   "themes/snow": Snow,
+//   "formats/bold": Bold,
+//   "formats/italic": Italic,
+//   "formats/header": Header,
+// });
+
+import Quill from "quill";
+
+declare global {
+  interface Window {
+    quill: any;
+  }
+}
 
 @Component({
   tag: "app-field-html",
-  styleUrl: "app-field-html.css",
+  styleUrls: ["app-field-html.css"],
 })
 export class AppFieldHtml {
   @Element() el: HTMLElement;
   @Prop() fieldId: string;
+  @State() quill: any;
 
-  componentDidLoad() {}
+  componentDidLoad() {
+    var toolbarOptions = [["bold", "italic"]];
+    // @ts-ignore
+    this.quill = new Quill("#editor", {
+      // modules: {
+      //   toolbar: toolbarOptions,
+      // },
+      theme: "snow",
+    });
+  }
 
   render() {
     return (
       <Host>
-        <tinymce-editor
-          api-key="no-api-key"
-          height="500"
-          menubar="false"
-          plugins="advlist autolink lists link image charmap print preview anchor
-      searchreplace visualblocks code fullscreen
-      insertdatetime media table paste code help wordcount"
-          toolbar="undo redo | formatselect | bold italic backcolor |
-      alignleft aligncenter alignright alignjustify |
-      bullist numlist outdent indent | removeformat | help"
-          content_style="body
-      {
-        font-family:Helvetica,Arial,sans-serif;
-        font-size:14px
-      }"
-        >
-          {/* <!-- Adding some initial editor content --> */}
-          &lt;p&gt;Welcome to the TinyMCE Web Component example!&lt;/p&gt;
-        </tinymce-editor>
-
-        {/* <!--
-      Sourcing the `tinymce-webcomponent` from jsDelivr,
-      which sources TinyMCE from the Tiny Cloud.
-    --> */}
-        <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@1/dist/tinymce-webcomponent.min.js"></script>
+        <div id="editor" style={{ height: "200px" }}></div>
+        <button onClick={() => console.log(this.quill.root.innerHTML)}>
+          Log as Html
+        </button>
       </Host>
     );
   }

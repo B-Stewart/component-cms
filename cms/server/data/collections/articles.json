@@ -4,11 +4,14 @@
   "fields": [
     {
       "id": "c3cc5727-f5d5-4f2d-aa6e-4d3f6635aa11",
-      "externalId": "Title"
+      "slugName": "Title",
+      "slug": "title",
+      "type": "text"
     },
     {
       "id": "44b6228a-d9c5-48e3-ace8-4ecfbc128644",
-      "externalId": "Content",
+      "slugName": "Content",
+      "slug": "content",
       "type": "html"
     }
   ],

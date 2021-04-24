@@ -10,7 +10,15 @@ export class AppField {
   render() {
     switch (this.field.type) {
       case "text":
-        return <input value={this.field.value} name={this.field.id} />;
+        return (
+          <input
+            value={this.field.value}
+            name={this.field.id}
+            onChange={(e: Event) =>
+              (this.field.value = (e.target as HTMLInputElement).value)
+            }
+          />
+        );
       case "html":
         return <app-field-html />;
     }

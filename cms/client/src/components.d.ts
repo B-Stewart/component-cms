@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { IField } from "./global/types";
-import { RouterHistory } from "@stencil/router";
+import { MatchResults, RouterHistory } from "@stencil/router";
 export namespace Components {
     interface AppField {
         "field": Partial<IField>;
@@ -23,10 +23,16 @@ export namespace Components {
         "slug": string;
         "slugName": string;
     }
+    interface PageCollection {
+        "match": MatchResults;
+    }
     interface PageCollectionEdit {
-        "history": RouterHistory;
+        "match": MatchResults;
     }
     interface PageCollections {
+    }
+    interface PageEntityEdit {
+        "history": RouterHistory;
     }
     interface PageHome {
     }
@@ -62,6 +68,12 @@ declare global {
         prototype: HTMLAppSlugPairElement;
         new (): HTMLAppSlugPairElement;
     };
+    interface HTMLPageCollectionElement extends Components.PageCollection, HTMLStencilElement {
+    }
+    var HTMLPageCollectionElement: {
+        prototype: HTMLPageCollectionElement;
+        new (): HTMLPageCollectionElement;
+    };
     interface HTMLPageCollectionEditElement extends Components.PageCollectionEdit, HTMLStencilElement {
     }
     var HTMLPageCollectionEditElement: {
@@ -73,6 +85,12 @@ declare global {
     var HTMLPageCollectionsElement: {
         prototype: HTMLPageCollectionsElement;
         new (): HTMLPageCollectionsElement;
+    };
+    interface HTMLPageEntityEditElement extends Components.PageEntityEdit, HTMLStencilElement {
+    }
+    var HTMLPageEntityEditElement: {
+        prototype: HTMLPageEntityEditElement;
+        new (): HTMLPageEntityEditElement;
     };
     interface HTMLPageHomeElement extends Components.PageHome, HTMLStencilElement {
     }
@@ -86,8 +104,10 @@ declare global {
         "app-form": HTMLAppFormElement;
         "app-root": HTMLAppRootElement;
         "app-slug-pair": HTMLAppSlugPairElement;
+        "page-collection": HTMLPageCollectionElement;
         "page-collection-edit": HTMLPageCollectionEditElement;
         "page-collections": HTMLPageCollectionsElement;
+        "page-entity-edit": HTMLPageEntityEditElement;
         "page-home": HTMLPageHomeElement;
     }
 }
@@ -108,10 +128,16 @@ declare namespace LocalJSX {
         "slug"?: string;
         "slugName"?: string;
     }
+    interface PageCollection {
+        "match"?: MatchResults;
+    }
     interface PageCollectionEdit {
-        "history"?: RouterHistory;
+        "match"?: MatchResults;
     }
     interface PageCollections {
+    }
+    interface PageEntityEdit {
+        "history"?: RouterHistory;
     }
     interface PageHome {
     }
@@ -121,8 +147,10 @@ declare namespace LocalJSX {
         "app-form": AppForm;
         "app-root": AppRoot;
         "app-slug-pair": AppSlugPair;
+        "page-collection": PageCollection;
         "page-collection-edit": PageCollectionEdit;
         "page-collections": PageCollections;
+        "page-entity-edit": PageEntityEdit;
         "page-home": PageHome;
     }
 }
@@ -135,8 +163,10 @@ declare module "@stencil/core" {
             "app-form": LocalJSX.AppForm & JSXBase.HTMLAttributes<HTMLAppFormElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "app-slug-pair": LocalJSX.AppSlugPair & JSXBase.HTMLAttributes<HTMLAppSlugPairElement>;
+            "page-collection": LocalJSX.PageCollection & JSXBase.HTMLAttributes<HTMLPageCollectionElement>;
             "page-collection-edit": LocalJSX.PageCollectionEdit & JSXBase.HTMLAttributes<HTMLPageCollectionEditElement>;
             "page-collections": LocalJSX.PageCollections & JSXBase.HTMLAttributes<HTMLPageCollectionsElement>;
+            "page-entity-edit": LocalJSX.PageEntityEdit & JSXBase.HTMLAttributes<HTMLPageEntityEditElement>;
             "page-home": LocalJSX.PageHome & JSXBase.HTMLAttributes<HTMLPageHomeElement>;
         }
     }
