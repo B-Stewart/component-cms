@@ -1,4 +1,5 @@
 import { Component, h } from "@stencil/core";
+import { Route } from "../common/route";
 
 @Component({
   tag: "app-root",
@@ -16,7 +17,16 @@ export class AppRoot {
         <main>
           <stencil-router>
             <stencil-route-switch scrollTopOffset={0}>
-              <stencil-route url="/" component="page-home" exact={true} />
+              <Route
+                authenticated={true}
+                url="/"
+                component="page-home"
+                exact={true}
+              />
+              <stencil-route
+                url="/collections/edit"
+                component="page-collection-edit"
+              />
               <stencil-route
                 url="/collections/edit/:id"
                 component="page-collection-edit"
@@ -30,6 +40,8 @@ export class AppRoot {
                 url="/entities/edit"
                 component="page-entity-edit"
               />
+              <stencil-route url="/login" component="page-login" />
+              <stencil-route url="/sign-up" component="page-sign-up" />
             </stencil-route-switch>
           </stencil-router>
         </main>

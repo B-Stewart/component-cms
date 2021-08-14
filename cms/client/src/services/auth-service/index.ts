@@ -36,3 +36,5 @@ export const onAuthStateChange = async (callback: (user) => any) => {
   //user.uid works
   return onAuthStateChanged(auth, callback);
 };
+
+export const getCurrentUser = () => auth.currentUser;

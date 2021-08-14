@@ -36,6 +36,10 @@ export namespace Components {
     }
     interface PageHome {
     }
+    interface PageLogin {
+    }
+    interface PageSignUp {
+    }
 }
 declare global {
     interface HTMLAppFieldElement extends Components.AppField, HTMLStencilElement {
@@ -98,6 +102,18 @@ declare global {
         prototype: HTMLPageHomeElement;
         new (): HTMLPageHomeElement;
     };
+    interface HTMLPageLoginElement extends Components.PageLogin, HTMLStencilElement {
+    }
+    var HTMLPageLoginElement: {
+        prototype: HTMLPageLoginElement;
+        new (): HTMLPageLoginElement;
+    };
+    interface HTMLPageSignUpElement extends Components.PageSignUp, HTMLStencilElement {
+    }
+    var HTMLPageSignUpElement: {
+        prototype: HTMLPageSignUpElement;
+        new (): HTMLPageSignUpElement;
+    };
     interface HTMLElementTagNameMap {
         "app-field": HTMLAppFieldElement;
         "app-field-html": HTMLAppFieldHtmlElement;
@@ -109,6 +125,8 @@ declare global {
         "page-collections": HTMLPageCollectionsElement;
         "page-entity-edit": HTMLPageEntityEditElement;
         "page-home": HTMLPageHomeElement;
+        "page-login": HTMLPageLoginElement;
+        "page-sign-up": HTMLPageSignUpElement;
     }
 }
 declare namespace LocalJSX {
@@ -141,6 +159,10 @@ declare namespace LocalJSX {
     }
     interface PageHome {
     }
+    interface PageLogin {
+    }
+    interface PageSignUp {
+    }
     interface IntrinsicElements {
         "app-field": AppField;
         "app-field-html": AppFieldHtml;
@@ -152,6 +174,8 @@ declare namespace LocalJSX {
         "page-collections": PageCollections;
         "page-entity-edit": PageEntityEdit;
         "page-home": PageHome;
+        "page-login": PageLogin;
+        "page-sign-up": PageSignUp;
     }
 }
 export { LocalJSX as JSX };
@@ -168,6 +192,8 @@ declare module "@stencil/core" {
             "page-collections": LocalJSX.PageCollections & JSXBase.HTMLAttributes<HTMLPageCollectionsElement>;
             "page-entity-edit": LocalJSX.PageEntityEdit & JSXBase.HTMLAttributes<HTMLPageEntityEditElement>;
             "page-home": LocalJSX.PageHome & JSXBase.HTMLAttributes<HTMLPageHomeElement>;
+            "page-login": LocalJSX.PageLogin & JSXBase.HTMLAttributes<HTMLPageLoginElement>;
+            "page-sign-up": LocalJSX.PageSignUp & JSXBase.HTMLAttributes<HTMLPageSignUpElement>;
         }
     }
 }

@@ -1,6 +1,6 @@
 export interface IEntity {
   id: string;
-  slugName: string; // Custom name of the uri
+  label: string; // Custom name of the uri
   slug: string; // url/unique alphabetical lower case id
 
   fields: IField[];
@@ -8,7 +8,7 @@ export interface IEntity {
 
 export class Entity implements IEntity {
   id: string;
-  slugName: string; // Custom name of the uri
+  label: string; // Custom name of the uri
   slug: string; // url/unique alphabetical lower case id
 
   fields: IField[];
@@ -16,7 +16,7 @@ export class Entity implements IEntity {
   constructor() {
     this.id = null;
     this.slug = null;
-    this.slugName = null;
+    this.label = null;
     this.fields = [];
   }
 }
@@ -45,3 +45,7 @@ export interface ITypedField {
 }
 
 export interface IHtmlField extends ITypedField {}
+
+// export type HTMLElementEvent<T extends HTMLElement> = Event & {
+//   target: T;
+// };

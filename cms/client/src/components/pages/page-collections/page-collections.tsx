@@ -8,14 +8,14 @@ export class PageCollections {
   @State() collections: ITypedEntity[] = [];
 
   async componentWillLoad() {
-    const collectionsRequest = await fetch(`//localhost:8082/meta/collections`);
-
-    this.collections = await collectionsRequest.json();
+    //const collectionsRequest = await fetch(`//localhost:8082/meta/collections`);
+    //this.collections = await collectionsRequest.json();
   }
 
   render() {
     return (
       <section>
+        <h1>Page Collections</h1>
         <stencil-route-link url="/collections/edit">
           Add New Collection
         </stencil-route-link>

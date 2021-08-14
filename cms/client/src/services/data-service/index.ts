@@ -27,4 +27,4 @@ export class DataService {
   // }
 }
 
-export const userService = new DataService();
+export const userService = new DataService("users");

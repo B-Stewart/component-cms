@@ -10,11 +10,10 @@ export class PageCollection {
   @State() collection: ITypedEntity;
 
   async componentWillLoad() {
-    const collectionsRequest = await fetch(
-      `//localhost:8082/collections/${this.match.params.id}`
-    );
-
-    this.collection = await collectionsRequest.json();
+    // const collectionsRequest = await fetch(
+    //   `//localhost:8082/collections/${this.match.params.id}`
+    // );
+    // this.collection = await collectionsRequest.json();
   }
 
   render() {
@@ -24,9 +23,7 @@ export class PageCollection {
           <button>Edit Meta Data</button>
         </stencil-route-link>
 
-        <stencil-route-link
-          url={`/entities/edit?collectionId=${this.match.params.id}`}
-        >
+        <stencil-route-link url={`/collections/edit`}>
           <button>Add New Collection</button>
         </stencil-route-link>
 

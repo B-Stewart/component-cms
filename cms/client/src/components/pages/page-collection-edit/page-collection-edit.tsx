@@ -11,20 +11,31 @@ export class PageCollectionEdit {
   @State() entity = new Entity();
 
   async componentWillLoad() {
-    if (this.match.params.id) {
-      const req = await fetch(
-        `//localhost:8082/meta/collections/${this.match.params.id}`
-      );
-      this.entity = await req.json();
-      console.log(this.entity);
-    }
+    // console.log(this.match.params.id);
+    // if (this.match.params.id) {
+    //   const req = await fetch(
+    //     `//localhost:8082/meta/collections/${this.match.params.id}`
+    //   );
+    //   this.entity = await req.json();
+    //   console.log(this.entity);
+    // }
   }
 
   addField() {
-    this.entity.fields = [
-      ...this.entity.fields,
-      { id: generateUUID(), type: "text", slug: "", slugName: "", value: null },
-    ];
+    // TODO: Immer?
+    this.entity = {
+      ...this.entity,
+      fields: [
+        ...this.entity.fields,
+        {
+          id: generateUUID(),
+          type: "text",
+          slug: "",
+          slugName: "",
+          value: null,
+        },
+      ],
+    };
   }
 
   // TODO: Type event
@@ -43,16 +54,16 @@ export class PageCollectionEdit {
     // TODO: Is this best practice?
     console.log("posting", this.entity);
 
-    const response = await fetch(`//localhost:8082/meta/collection`, {
-      method: "POST",
-      body: JSON.stringify(this.entity),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
+    // const response = await fetch(`//localhost:8082/meta/collection`, {
+    //   method: "POST",
+    //   body: JSON.stringify(this.entity),
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   },
+    // });
 
-    const res = await response.json();
-    console.log(res);
+    // const res = await response.json();
+    // console.log(res);
   };
 
   render() {

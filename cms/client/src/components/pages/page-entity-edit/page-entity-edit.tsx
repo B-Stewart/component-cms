@@ -10,13 +10,13 @@ export class PageEntityEdit {
   @State() entity = new Entity();
 
   async componentWillLoad() {
-    if (this.history.location.query.collectionId) {
-      const req = await fetch(
-        `//localhost:8082/meta/collections/${this.history.location.query.collectionId}`
-      );
-      this.entity = await req.json();
-      console.log(this.entity);
-    }
+    // if (this.history.location.query.collectionId) {
+    //   const req = await fetch(
+    //     `//localhost:8082/meta/collections/${this.history.location.query.collectionId}`
+    //   );
+    //   this.entity = await req.json();
+    //   console.log(this.entity);
+    // }
   }
 
   handleSubmit = async () => {
